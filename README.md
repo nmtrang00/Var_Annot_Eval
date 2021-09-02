@@ -1,15 +1,16 @@
 This is a variant annotation and evaluation pipeline as described in [[Paper name]]. Some scoring tools (SIFT4G, Polyphen-2, MutationTaster2021, SpliceAI) only offer command-line or web-based programs. You can follow the instruction below to download and annotate variants with those tools separately, then use provided scripts to format and combine with the annotation from precomputed databases.
 
 # INSTALLATION
-The pipeline and submodules (Dython) can be dowloaded as followed.
+To optimize the analysis, we use Dython as a submodule and make some alternations to the package. The pipeline and optimized packages can be downloaded as followed.
 ```
-git clone https://github.com/nmtrang00/KSE2021_Variant-Annotation.git
+git clone  --recurse-submodules https://github.com/nmtrang00/KSE2021_Variant-Annotation.git
 ```
-If you only want to download the pipepline, please do as followed.
+If you forget to use ```--recurse-submodules```, please proceed with two lines of codes below.
 ```
-git clone https://github.com/nmtrang00/KSE2021_Variant-Annotation.git
+git submodule init
+git submodule update
 ```
-The links to github or website of tools not offering precomputed data.
+The links to github or website of tools not offering precomputed data.\
 SIFT4G: https://sift.bii.a-star.edu.sg/ \
 Polyphen-2: http://genetics.bwh.harvard.edu/pph2/bgi.shtml \
 MutationTaster2021: https://www.genecascade.org/MutationTaster2021/info/ \
@@ -21,16 +22,15 @@ conda activate bwtool
 conda install -c bioconda htslib==1.3.2
 conda install -c pwwang bwtool
 conda install -c bioconda openssl=1.0
-conda install -c bioconda cyvcf2==
-conda install -c bioconda pandas==
-conda install -c anaconda seaborn==
-conda install -c conda-forge matplotlib==
-conda install -c conda-forge ppscore==
+conda install -c bioconda cyvcf2==0.10.0
+conda install -c bioconda pandas==1.1.5
+conda install -c anaconda seaborn==0.11.1
+conda install -c conda-forge matplotlib==3.4.1
+conda install -c conda-forge ppscore==1.2.0
 ```
-For Dython, we perform some alternation to optimize the analysis, please download from the follow repository: https://github.com/mainguyenanhvu/dython.git
 
 # VARIANTS ANNOTATION
-## Annotaion with command line programs
+## Annotation with command line programs
 In development
 ## Annotation with precomputed scores
 ### Precomputed databases
