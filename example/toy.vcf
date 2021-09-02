@@ -1,0 +1,38 @@
+##fileformat=VCFv4.2
+##fileDate=20210720
+##reference='/media/vinbdi/data/NAS/ReferenceData/Reference.Broad-resourcebundle_GRCh38/Homo_sapiens_assembly38.fasta'
+##ID=<Description="VarAnt ID">
+##contig=<ID=1>
+##contig=<ID=2>
+##contig=<ID=3>
+##contig=<ID=4>
+##contig=<ID=5>
+##contig=<ID=6>
+##contig=<ID=7>
+##contig=<ID=8>
+##contig=<ID=9>
+##contig=<ID=10>
+##contig=<ID=11>
+##contig=<ID=12>
+##contig=<ID=13>
+##contig=<ID=14>
+##contig=<ID=15>
+##contig=<ID=16>
+##contig=<ID=17>
+##contig=<ID=18>
+##contig=<ID=19>
+##contig=<ID=20>
+##contig=<ID=21>
+##contig=<ID=22>
+##contig=<ID=X>
+##contig=<ID=Y>
+##contig=<ID=M>
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
+1	10001	.	T	G	.	.	.
+1	10001	.	T	C	.	.	.
+1	10002	.	A	T	.	.	.
+1	10003	.	A	G	.	.	.
+1	69134	.	A	T	.	.	.
+1	860329	.	G	T	.	.	.
+1	976199	.	G	GC	.	.	.
+1	976718	.	TCCTGCGCCGCG	T	.	.
