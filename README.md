@@ -49,11 +49,11 @@ Run the following script
 ```
 ./annotation_scripts/run_annotation.sh [inVCF] [resources] [output] [keeping_tmp_files]
 ```
-Required parameters:
--```invcf```: Directory to input VCF with variants of interest.
--```resources```: Directory to databases storage folder.
--```output```: Directory to annotated TAB.
--```keeping_tmp_files```: 0 to remove all tmp scoring files, 1 to keep all of them.
+Required parameters:\
+-```invcf```: Directory to input VCF with variants of interest.\
+-```resources```: Directory to databases storage folder.\
+-```output```: Directory to annotated TAB.\
+-```keeping_tmp_files```: 0 to remove all tmp scoring files, 1 to keep all of them.\
 
 # DATA EVALUATION
 
