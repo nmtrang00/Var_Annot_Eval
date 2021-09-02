@@ -38,15 +38,15 @@ Download databases needed for the annotation.
 ```
 ./annotation_scripts/get_databases.sh [resources]
 ```
-Required parameters:
+Required parameters:\
 -```resources```: Directory to databases storage folder.\
 In order to download PrimateAI datbases, you need to have an Illumina account. Please do as instructed in the following link [PrimateAI](https://basespace.illumina.com/s/yYGFdGih1rXL) and download file name "PrimateAI_scores_v0.2.tsv.gz" to the same folder storaging other databases.
 Preprocess databases for optimal query:
 ```
 ./annotation_scripts/prepare_datbases.sh [resources]
 ```
-Required parameters:
--```resources```: Directory to databases storage folder.\
+Required parameters:\
+-```resources```: Directory to databases storage folder.
 ### Variants annotation
 Run the following script
 ```
@@ -56,7 +56,7 @@ Required parameters:\
 -```invcf```: Directory to input VCF with variants of interest.\
 -```resources```: Directory to databases storage folder.\
 -```output```: Directory to annotated TAB.\
--```keeping_tmp_files```: 0 to remove all tmp scoring files, 1 to keep all of them.\
+-```keeping_tmp_files```: 0 to remove all tmp scoring files, 1 to keep all of them.
 
 # Data Evaluation
 
