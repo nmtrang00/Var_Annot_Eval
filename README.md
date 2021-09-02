@@ -27,6 +27,7 @@ conda install -c bioconda pandas==1.1.5
 conda install -c anaconda seaborn==0.11.1
 conda install -c conda-forge matplotlib==3.4.1
 conda install -c conda-forge ppscore==1.2.0
+pip install git+https://github.com/mainguyenanhvu/dython.git
 ```
 
 # Variants Annotation
@@ -59,7 +60,12 @@ Required parameters:\
 -```keeping_tmp_files```: 0 to remove all tmp scoring files, 1 to keep all of them.
 
 # Data Evaluation
-
+To generate ppscore and association score, use the following command:
+```
+python annotation_evaluation.py -i [inCSV] -o [outputFolder]
+```
+- ```inCSV```: Directory to input tab-formated file.
+- ```outputFolder```: Directory to a output folder
 # Contact
 
 
