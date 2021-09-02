@@ -1,4 +1,4 @@
-This is a variant annotation and evaluation pipeline as described in [[Paper name]]. Some scoring tools (SIFT4G, Polyphen-2, MutationTaster2021, SpliceAI) only offer command-line or web-based programs. You can follow the instruction below to download and annotate variants with those tools separately, then use provided scripts to format and combine with the annotation from precomputed databases.
+This is a variant annotation and evaluation pipeline as described in [State of Variant Annotation](). Some scoring tools (SIFT4G, Polyphen-2, MutationTaster2021, SpliceAI) only offer command-line or web-based programs. You can follow the instruction below to download and annotate variants with those tools separately, then use provided scripts to format and combine with the annotation from precomputed databases.
 
 # Installation
 To optimize the analysis, we use Dython as a submodule and make some alternations to the package. The pipeline and optimized packages can be downloaded as followed.
@@ -36,14 +36,17 @@ In development
 ### Precomputed databases
 Download databases needed for the annotation.
 ```
-./annotation_scripts/get_databases.sh /dir/to/storage/folder
+./annotation_scripts/get_databases.sh [resources]
 ```
+Required parameters:
+-```resources```: Directory to databases storage folder.\
 In order to download PrimateAI datbases, you need to have an Illumina account. Please do as instructed in the following link [PrimateAI](https://basespace.illumina.com/s/yYGFdGih1rXL) and download file name "PrimateAI_scores_v0.2.tsv.gz" to the same folder storaging other databases.
 Preprocess databases for optimal query:
 ```
-./annotation_scripts/prepare_datbases.sh /dir/to/storage/folder
+./annotation_scripts/prepare_datbases.sh [resources]
 ```
-
+Required parameters:
+-```resources```: Directory to databases storage folder.\
 ### Variants annotation
 Run the following script
 ```
