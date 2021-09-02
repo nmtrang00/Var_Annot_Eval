@@ -1,6 +1,6 @@
 This is a variant annotation and evaluation pipeline as described in [[Paper name]]. Some scoring tools (SIFT4G, Polyphen-2, MutationTaster2021, SpliceAI) only offer command-line or web-based programs. You can follow the instruction below to download and annotate variants with those tools separately, then use provided scripts to format and combine with the annotation from precomputed databases.
 
-# INSTALLATION
+# Installation
 To optimize the analysis, we use Dython as a submodule and make some alternations to the package. The pipeline and optimized packages can be downloaded as followed.
 ```
 git clone  --recurse-submodules https://github.com/nmtrang00/KSE2021_Variant-Annotation.git
@@ -29,7 +29,7 @@ conda install -c conda-forge matplotlib==3.4.1
 conda install -c conda-forge ppscore==1.2.0
 ```
 
-# VARIANTS ANNOTATION
+# Variants Annotation
 ## Annotation with command line programs
 In development
 ## Annotation with precomputed scores
@@ -55,8 +55,8 @@ Required parameters:\
 -```output```: Directory to annotated TAB.\
 -```keeping_tmp_files```: 0 to remove all tmp scoring files, 1 to keep all of them.\
 
-# DATA EVALUATION
+# Data Evaluation
 
-# CONTACT
+# Contact
 
 
