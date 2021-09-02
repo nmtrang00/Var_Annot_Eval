@@ -17,7 +17,7 @@ MutationTaster2021: https://www.genecascade.org/MutationTaster2021/info/ \
 SpliceAI: https://github.com/Illumina/SpliceAI.git \
 Required python packages in requirements.txt can be installed with pip or conda. To prevent any undesired, it is recommended to setup a conda env as followed.
 ```
-conda create -n bwtool
+conda create -n bwtool python=3.6
 conda activate bwtool
 conda install -c bioconda htslib==1.3.2
 conda install -c pwwang bwtool
@@ -40,24 +40,24 @@ Download databases needed for the annotation.
 ./annotation_scripts/get_databases.sh [resources]
 ```
 Required parameters:\
--```resources```: Directory to databases storage folder.\
+- ```resources```: Directory to databases storage folder.\
 In order to download PrimateAI datbases, you need to have an Illumina account. Please do as instructed in the following link [PrimateAI](https://basespace.illumina.com/s/yYGFdGih1rXL) and download file name "PrimateAI_scores_v0.2.tsv.gz" to the same folder storaging other databases.
 Preprocess databases for optimal query:
 ```
 ./annotation_scripts/prepare_datbases.sh [resources]
 ```
 Required parameters:\
--```resources```: Directory to databases storage folder.
+- ```resources```: Directory to databases storage folder.
 ### Variants annotation
 Run the following script
 ```
 ./annotation_scripts/run_annotation.sh [inVCF] [resources] [output] [keeping_tmp_files]
 ```
 Required parameters:\
--```invcf```: Directory to input VCF with variants of interest.\
--```resources```: Directory to databases storage folder.\
--```output```: Directory to annotated TAB.\
--```keeping_tmp_files```: 0 to remove all tmp scoring files, 1 to keep all of them.
+- ```invcf```: Directory to input VCF with variants of interest.\
+- ```resources```: Directory to databases storage folder.\
+- ```output```: Directory to annotated TAB.\
+- ```keeping_tmp_files```: 0 to remove all tmp scoring files, 1 to keep all of them.
 
 # Data Evaluation
 To generate ppscore and association score, use the following command:
