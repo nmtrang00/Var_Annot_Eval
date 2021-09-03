@@ -32,7 +32,15 @@ pip install git+https://github.com/mainguyenanhvu/dython.git
 
 # Variants Annotation
 ## Annotation with command line programs
-In development
+After annotating variants with command-line or web-based programs, do as follow to turn the output the format that can be combined with other precomputed scores.\
+Get the most severe consequences of each variant from SIFT4G:
+```
+python3 annotation_scripts/get_SIFT_most_severe.py -i [SIFTannotations.xls] -o [output]
+```
+Required parameters:\
+- ```-i```: Dir to SIFT output ended with "_SIFTannotations.xls"\
+- ```-o```: Dir to output TAB with 6 columns: "var" ""SIFT_transcript_id", "SIFT_variant_type","SIFT_score", "SIFT_median", "SIFT_prediction"
+
 ## Annotation with precomputed scores
 ### Precomputed databases
 Download databases needed for the annotation.
@@ -64,8 +72,8 @@ To generate ppscore and association score, use the following command:
 ```
 python annotation_evaluation.py -i [inCSV] -o [outputFolder]
 ```
-- ```inCSV```: Directory to input tab-formated file.
-- ```outputFolder```: Directory to a output folder
+- ```-i```: Directory to input tab-formated file.
+- ```-o```: Directory to a output folder
 # Contact
 
 
