@@ -1,0 +1,110 @@
+#!/bin/python
+
+import pandas as pd
+import argparse
+
+parser = argparse.ArgumentParser(description='To get most severe consequence for each variant from SIFT4G')
+parser.add_argument("-i", "--input", help="Dir to the SIFT4G annoation file (eg. toy_SIFTannotations.xls)", type=str)
+parser.add_argument("-o", "--output", help="Dir to the output tab", type=str)
+args = parser.parse_args()
+
+inpp_div='/media/vinbdi/data/NAS/VarAnt_Project/testMASH_Processing_data/result/pp/pph2-full.txt' 
+# inpp_var='/media/vinbdi/data1/NMT/clinvar/result/external_tools/pp/var/pph2-full_var.txt'
+with open(inpp_div,'r') as f:
+    new_names_div=f.readlines()[0].split('\t')
+    new_names_div.append("var_id")
+print(new_names_div)
+div_df=pd.read_csv(inpp_div,sep='\t',header=0,names=new_names_div)
+print(set(div_df['        prediction'].tolist()))
+#Extract isoform
+with open('/media/vinbdi/data1/NMT/clinvar/input/ucsc_pph2_var.txt','w') as f:
+    ucsc_arr=[]
+    count=0
+    for i in range(inpp_var.shape[0]):
+        name_var=inpp_var["var_id"][i]
+        try:
+            tc=name_var.split('|')[2]
+            tc_var=tc[:len(tc)-1]
+            # print(tc_var)
+            if not tc_var in ucsc_arr:
+                f.write(tc_var)
+                f.write('\n')
+                ucsc_arr.append(tc_var)
+            print(count)
+            count+=1
+        except:
+            print(count)
+            count+=1
+            continue
+       
+# pp-query: Keep the variant with higher f1_score pph2-TPR
+div_dict_f1=dict()
+div_dict_tpr=dict()
+div_dict_prob=dict()
+count=0
+for i in range(div_df.shape[0]):
+# for i in range(6):
+    if not div_df['        pph2_class'][i] in ['           neutral', '       deleterious']:
+        continue
+    name_var=div_df["var_id"][i]
+    try:
+        name_split=name_var.split('|')
+        var_new=name_split[0][2:]+'-'+name_split[1][0]+'-'+name_split[1][1]
+        tc=name_split[2]
+        tc_var=tc[:len(tc)-1]
+        # print(var_new)
+        count+=1
+    except:
+        print(count)
+        count+=1
+        continue
+    #F1 score
+    ppv=1-float(div_df['  pph2_FDR'][i])
+    tpr=float(div_df['  pph2_TPR'][i])
+    f1=2*(ppv*tpr)/(ppv+tpr) 
+    # print(f1)
+    if not var_new in div_dict_f1.keys():
+        div_dict_f1[var_new]=[tc_var,div_df['        prediction'][i],div_df['        pph2_class'][i],float(div_df[' pph2_prob'][i]),float(div_df['  pph2_FPR'][i]), float(div_df['  pph2_TPR'][i]),float(div_df['  pph2_FDR'][i]),f1]
+    else:
+        # print(div_dict_f1[var_new][-1])
+        if f1 > div_dict_f1[var_new][-1]:
+            div_dict_f1[var_new]=[tc_var,div_df['        prediction'][i],div_df['        pph2_class'][i],float(div_df[' pph2_prob'][i]),float(div_df['  pph2_FPR'][i]), float(div_df['  pph2_TPR'][i]),float(div_df['  pph2_FDR'][i]),f1]
+        # print(div_dict_f1[var_new][-1])
+    #TPR
+    if not var_new in div_dict_tpr.keys():
+        div_dict_tpr[var_new]=[tc_var,div_df['        prediction'][i],div_df['        pph2_class'][i],float(div_df[' pph2_prob'][i]),float(div_df['  pph2_FPR'][i]), float(div_df['  pph2_TPR'][i]),float(div_df['  pph2_FDR'][i]),f1]
+    else:
+        if float(div_df['  pph2_TPR'][i])> div_dict_tpr[var_new][5]:
+            div_dict_tpr[var_new]=[tc_var,div_df['        prediction'][i],div_df['        pph2_class'][i],float(div_df[' pph2_prob'][i]),float(div_df['  pph2_FPR'][i]), float(div_df['  pph2_TPR'][i]),float(div_df['  pph2_FDR'][i]),f1]
+    #pph2_prob
+    if not var_new in div_dict_prob.keys():
+        div_dict_prob[var_new]=[tc_var,div_df['        prediction'][i],div_df['        pph2_class'][i],float(div_df[' pph2_prob'][i]),float(div_df['  pph2_FPR'][i]), float(div_df['  pph2_TPR'][i]),float(div_df['  pph2_FDR'][i]),f1]
+    else:
+        if div_df['        prediction'][i] == '            benign':
+            if float(div_df[' pph2_prob'][i])< div_dict_prob[var_new][3]:
+                div_dict_prob[var_new]=[tc_var,div_df['        prediction'][i],div_df['        pph2_class'][i],float(div_df[' pph2_prob'][i]),float(div_df['  pph2_FPR'][i]), float(div_df['  pph2_TPR'][i]),float(div_df['  pph2_FDR'][i]),f1]
+        else:
+            if float(div_df[' pph2_prob'][i])> div_dict_prob[var_new][3]:
+                div_dict_prob[var_new]=[tc_var,div_df['        prediction'][i],div_df['        pph2_class'][i],float(div_df[' pph2_prob'][i]),float(div_df['  pph2_FPR'][i]), float(div_df['  pph2_TPR'][i]),float(div_df['  pph2_FDR'][i]),f1]
+    print(count)
+new_div_df_f1=pd.DataFrame.from_dict(div_dict_f1,orient="index")
+new_div_df_f1.columns=["ucsc_isoform","prediction","class","NB_prob","fpr","tpr","fdr","f1_score"]
+new_div_df_f1.to_csv('/media/vinbdi/data1/NMT/clinvar/result/external_tools/pp/var/pph2-f1_score_var.txt',sep='\t')
+
+new_div_df_tpr=pd.DataFrame.from_dict(div_dict_tpr,orient="index")
+new_div_df_tpr.columns=["ucsc_isoform","prediction","class","NB_prob","fpr","tpr","fdr","f1_score"]
+new_div_df_tpr.to_csv('/media/vinbdi/data1/NMT/clinvar/result/external_tools/pp/var/pph2-tpr_var.txt',sep='\t')
+
+new_div_df_prob=pd.DataFrame.from_dict(div_dict_prob,orient="index")
+new_div_df_prob.columns=["ucsc_isoform","prediction","class","NB_prob","fpr","tpr","fdr","f1_score"]
+new_div_df_prob.to_csv('/media/vinbdi/data1/NMT/clinvar/result/external_tools/pp/var/pph2-prob_var.txt',sep='\t')
+
+# print(new_div_df_f1)
+# print(new_div_df_tpr)
+# print(new_div_df_prob)
+
+if_df=pd.read_csv('/media/vinbdi/data1/NMT/clinvar/result/external_tools/pp/div/pph2-f1_score_div.txt',sep='\t',header=0)
+ucsc_list=set(if_df["ucsc_isoform"].tolist())
+ucsc_df=pd.DataFrame(ucsc_list)
+ucsc_df.to_csv('/media/vinbdi/data1/NMT/clinvar/result/external_tools/pp/div/pph2-isoform_div.txt',index=False)
+
