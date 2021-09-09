@@ -33,7 +33,8 @@ pip install git+https://github.com/mainguyenanhvu/dython.git
 # Variants Annotation
 ## Annotation with command line programs
 After annotating variants with command-line or web-based programs, do as follow to turn the output the format that can be combined with other precomputed scores.\
-Get the most severe consequences of each variant from SIFT4G:
+### SIFT
+Include -t option when running SIFT to get annotations for all possible transcripts, else SIFT automatically chooses the annotation for the 1st transcript. Get the most severe consequences of each variant from SIFT4G:
 ```
 python3 annotation_scripts/get_SIFT_most_severe.py -i [SIFTannotations.xls] -r [ID_table] -o [output]
 ```

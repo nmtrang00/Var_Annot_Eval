@@ -3,7 +3,7 @@
 import pandas as pd
 import argparse
 
-parser = argparse.ArgumentParser(description='To get most severe consequence for each variant from SIFT4G')
+parser = argparse.ArgumentParser(description='To get most severe consequence for each variant from Polyphen-2')
 parser.add_argument("-i", "--input", help="Dir to the SIFT4G annoation file (eg. toy_SIFTannotations.xls)", type=str)
 parser.add_argument("-o", "--output", help="Dir to the output tab", type=str)
 args = parser.parse_args()
@@ -15,7 +15,7 @@ with open(inpp_div,'r') as f:
     new_names_div.append("var_id")
 print(new_names_div)
 div_df=pd.read_csv(inpp_div,sep='\t',header=0,names=new_names_div)
-print(set(div_df['        prediction'].tolist()))
+
 #Extract isoform
 with open('/media/vinbdi/data1/NMT/clinvar/input/ucsc_pph2_var.txt','w') as f:
     ucsc_arr=[]
