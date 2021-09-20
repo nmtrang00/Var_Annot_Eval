@@ -3,7 +3,7 @@ This is a variant annotation and evaluation pipeline as described in [State of V
 # Installation
 To optimize the analysis, we use Dython as a submodule and make some alternations to the package. The pipeline and optimized packages can be downloaded as followed.
 ```
-git clone  --recurse-submodules https://github.com/nmtrang00/KSE2021_Variant-Annotation.git
+git clone  --recurse-submodules https://github.com/nmtrang00/Var_Annot_Eval
 ```
 If you forget to use ```--recurse-submodules```, please proceed with two lines of codes below.
 ```
