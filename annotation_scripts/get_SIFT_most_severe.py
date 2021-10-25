@@ -1,29 +1,30 @@
 #!/bin/python
-from typing import final
 import pandas as pd
-from cyvcf2 import VCF
 import argparse
 import numpy as np
 
 parser = argparse.ArgumentParser(description='To get most severe consequence for each variant from SIFT4G')
 parser.add_argument("-i", "--input", help="Dir to the SIFT4G annotation file (eg. toy_SIFTannotations.xls)", type=str)
-parser.add_argument("-r", "--reference", help="Dir to the input VCF", type=str)
+parser.add_argument("-r", "--reference", help="Dir to the ID table created from the original VCF", type=str)
 parser.add_argument("-o", "--output", help="Dir to the output tab", type=str)
 args = parser.parse_args()
 
-invcf=VCF(args.reference)
-final_dict=dict()
-for variant in invcf:
-    if "chr" in str(variant.CHROM):
-        chr=str(variant.CHROM)
-    else:
-        chr="chr"+str(variant.CHROM)
-    try:
-        var_id=chr+':'+str(variant.POS)+"-"+variant.REF+'-'+variant.ALT[0]
-        final_dict[var_id]=[variant.ID]
-    except:
-        var_id=chr+':'+str(variant.POS)+"-"+variant.REF+'-.'
-        final_dict[var_id]=[variant.ID]
+with open(args.reference) as ref:
+    line=ref.readline()
+    count=0
+    final_dict=dict()
+    while line:
+        var=line.strip().split("\t")
+        if var[0]=="var":
+            line = ref.readline()
+            count += 1
+            continue
+        if "chr" in var[0]:
+            final_dict[var[0]]=[var[1]]
+        else:
+            final_dict["chr"+var[0]]=[var[1]]
+        line = ref.readline()
+        count += 1
 
 #CHROM|0   POS|1     REF_ALLELE|2      ALT_ALLELE|3      TRANSCRIPT_ID|4   GENE_ID|5 GENE_NAME|6       REGION|7  VARIANT_TYPE|8    REF_AMINO|9       ALT_AMINO|10       AMINO_POS|11       SIFT_SCORE|12      SIFT_MEDIAN|13     NUM_SEQS|14        dbSNP|15   SIFT_PREDICTION|16
 with  open(args.input) as infile:
@@ -86,4 +87,6 @@ with  open(args.input) as infile:
         count+=1
 final_df=pd.DataFrame.from_dict(final_dict,orient="index")
 final_df.columns=["id","SIFT_transcript_id", "SIFT_variant_type", "SIFT_score", "SIFT_median", "SIFT_prediction"]
-final_df.to_csv(args.output,sep='\t')                                                                                                      
+final_df.to_csv(args.output,sep='\t')                                                                                                                              
+                 
+
