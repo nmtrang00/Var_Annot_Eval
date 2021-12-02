@@ -10,11 +10,11 @@ If you forget to use ```--recurse-submodules```, please proceed with two lines o
 git submodule init
 git submodule update
 ```
-The links to github or website of tools not offering precomputed data.\
-SIFT4G: https://sift.bii.a-star.edu.sg/ \
-Polyphen-2: http://genetics.bwh.harvard.edu/pph2/bgi.shtml \
-MutationTaster2021: https://www.genecascade.org/MutationTaster2021/info/ \
-SpliceAI: https://github.com/Illumina/SpliceAI.git \
+The links to github or website of tools not offering precomputed data.
+SIFT4G: https://sift.bii.a-star.edu.sg/ 
+Polyphen-2: http://genetics.bwh.harvard.edu/pph2/bgi.shtml 
+MutationTaster2021: https://www.genecascade.org/MutationTaster2021/info/ 
+SpliceAI: https://github.com/Illumina/SpliceAI.git 
 Required python packages in requirements.txt can be installed with pip or conda. To prevent any undesired, it is recommended to setup a conda env as followed.
 ```
 conda create -n bwtool python=3.6
