@@ -1,4 +1,4 @@
-This is a variant annotation and evaluation pipeline as described in [State of Variant Annotation](). Some scoring tools (SIFT4G, Polyphen-2, MutationTaster2021, SpliceAI) only offer command-line or web-based programs. You can follow the instruction below to download and annotate variants with those tools separately, then use provided scripts to format and combine with the annotation from precomputed databases.
+This is a variant annotation and evaluation pipeline as described in [A comprehensive and bias-free evaluation of genomic variant clinical interpretation tools](https://doi.org/10.1109/KSE53942.2021.9648755). Some scoring tools (SIFT4G, Polyphen-2, MutationTaster2021, SpliceAI) only offer command-line or web-based programs. You can follow the instruction below to download and annotate variants with those tools separately, then use provided scripts to format and combine with the annotation from precomputed databases.
 
 # Installation
 To optimize the analysis, we use Dython as a submodule and make some alternations to the package. The pipeline and optimized packages can be downloaded as followed.
