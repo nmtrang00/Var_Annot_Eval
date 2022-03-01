@@ -76,6 +76,17 @@ python annotation_evaluation.py -i [inCSV] -o [outputFolder]
 ```
 - ```-i```: Directory to input tab-formated file.
 - ```-o```: Directory to a output folder
+# Citation
+```
+@inproceedings{trang2021comprehensive,
+  title={A comprehensive and bias-free evaluation of genomic variant clinical interpretation tools},
+  author={Trang, Nguyen Minh and Vu, Mai Nguyen Anh and Anh, Tran Hoang and Nguyen, Nguyen Thanh and others},
+  booktitle={2021 13th International Conference on Knowledge and Systems Engineering (KSE)},
+  pages={1--5},
+  year={2021},
+  organization={IEEE}
+}
+```
 # Contact
 
 
